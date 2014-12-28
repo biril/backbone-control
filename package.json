@@ -1,0 +1,29 @@
+{
+  "name": "backbone-control",
+  "version": "0.0.1",
+  "author": "biril <alexlambiris@gmail.com>",
+  "description": "Common UI elements, re-invented as data-driven Backbone components",
+  "contributors": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/biril/backbone-control"
+  },
+  "bugs": "https://github.com/biril/backbone-control/issues",
+  "license": "MIT",
+  "keywords": [
+    "backbone",
+    "UI",
+    "controls"
+  ],
+  "dependencies": {
+    "backbone": "^1.1.2",
+    "underscore": "^1.7.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.6.0",
+    "less": "^2.3.1"
+  },
+  "engines": {
+    "node": ">=0.10"
+  }
+}
