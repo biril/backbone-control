@@ -23,7 +23,13 @@
     "jshint": "^2.6.0",
     "less": "^2.3.1"
   },
+  "scripts": {
+    "lint": "jshint --show-non-errors lib/*.js spec/*.js"
+  },
   "engines": {
     "node": ">=0.10"
+  },
+  "directories": {
+    "lib": "lib"
   }
 }
