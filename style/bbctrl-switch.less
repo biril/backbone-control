@@ -1,0 +1,35 @@
+/* BackboneControl Switch styles */
+
+.bbctrlSwitch {
+  height: 18px;
+  width: 40px;
+  border: 1px solid #99ACC8;
+  cursor: pointer;
+}
+
+.bbctrlSwitch_handle {
+  width: 16px;
+  height: 16px;
+  margin: 1px 0 0 1px;
+  background: #5D93E2;
+}
+
+.bbctrlSwitch:hover .bbctrlSwitch_handle {
+  background: #3879d9;
+}
+
+.bbctrlSwitch_isOn .bbctrlSwitch_handle {
+  margin-left: 23px;
+}
+
+.bbctrlSwitch_isDisabled {
+  cursor: default;
+
+  .bbctrlSwitch_handle {
+    background: #99ACC8;
+  }
+
+  &.bbctrlSwitch:hover .bbctrlSwitch_handle {
+    background: #99ACC8;
+  }
+}
