@@ -10,4 +10,4 @@ License
 
 Licensed under the MIT License (LICENSE.txt).
 
-Copyright (c) 2015 Alex Lambiris
+Copyright (c) 2014-2015 Alex Lambiris
