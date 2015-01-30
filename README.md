@@ -1,7 +1,7 @@
 Backbone Control
 ================
 
-Common UI elements, re-invented as data-driven Backbone components. This is a very early revision
+Common UI elements, reinvented as data-driven Backbone components. This is a very early revision
 and further documentation is forthcoming.
 
 

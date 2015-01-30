@@ -2,7 +2,7 @@
   "name": "backbone-control",
   "version": "0.0.1",
   "author": "biril <alexlambiris@gmail.com>",
-  "description": "Common UI elements, re-invented as data-driven Backbone components",
+  "description": "Common UI elements, reinvented as data-driven Backbone components",
   "contributors": [],
   "repository": {
     "type": "git",
