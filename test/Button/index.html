@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <title>BackboneControl.Button test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="fixture">
+    <div class="modifySection">
+      <div class="modifier enableIncrease">Enable increase</div>
+      <div class="modifier disableIncrease">Disable increase</div>
+      <div class="modifier enableDecrease">Enable decrease</div>
+      <div class="modifier disableDecrease">Disable decrease</div>
+    </div>
+    <div class="testSection">
+      <div class="increaseCountButton"></div>
+      <div class="decreaseCountButton"></div>
+      <div class="countSection">Count: <span class="count">0</span></div>
+    </div>
+    <div style="clear:left"></div>
+  </div>
+
+  <script type="text/javascript" src="../vendor/require.js"></script>
+  <script>
+    /*global require */
+    require.config({
+      baseUrl: '../../lib',
+      paths: {
+        jquery:     '../test/vendor/jquery',
+        underscore: '../test/vendor/underscore',
+        backbone:   '../test/vendor/backbone',
+
+        app: '../test/Button/app'
+      }
+    });
+    require(['app'], function (app) {
+      'use strict';
+      app.run();
+    });
+  </script>
+
+</body>
+</html>
