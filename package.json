@@ -26,7 +26,7 @@
   },
   "scripts": {
     "lint": "jshint --show-non-errors lib/*.js spec/*.js",
-    "test": "lessc --verbose test/Button/style.less test/Button/style.css && (ws -f none & WSPID=$! && rspec -fd test/Button/test.rb && kill $WSPID)"
+    "test": "bundle install && lessc --verbose test/Button/style.less test/Button/style.css && (ws -f none & WSPID=$! && rspec -fd test/Button/test.rb && kill $WSPID)"
   },
   "engines": {
     "node": ">=0.10"
