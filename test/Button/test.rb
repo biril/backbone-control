@@ -1,8 +1,4 @@
-require 'capybara/rspec'
-
-Capybara.run_server = false
-Capybara.default_driver = :selenium
-Capybara.default_wait_time = 5
+require File.expand_path("../../helper", __FILE__)
 
 button_selector = {
   root: '.bbctrlButton',
@@ -18,9 +14,11 @@ fixture_selector = {
   disable_decrease_button_modifier: '.modifier.disableDecrease'
 }
 
-describe 'the button control', :type => :feature do
+describe 'the button control', type: :feature, sauce: ENV['RUN_ON_SAUCE'] do
 
-  #
+  # Matchers to use when evaluating that the button appears as enabled / disabled. Modifying the
+  #  appearance of the button controls is indeed expected to break these tests - however tweaking
+  #  these matchers appropriately should be enough for all tests to pass again
 
   matcher :appear_as_enabled do
     match do |actual|
@@ -37,7 +35,6 @@ describe 'the button control', :type => :feature do
   #
 
   before do
-    # visit('file://' + File.expand_path(File.dirname(__FILE__)) + '/test.html')
     visit 'localhost:8000/test/Button'
     expect(page).to have_css(button_selector[:root]) # Wait for buttons to render before proceeding
   end

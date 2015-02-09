@@ -1,5 +1,6 @@
 env:
   global:
+    - RUN_ON_SAUCE: true
     - secure: WXComiq4lMs3hHcENwOTCZDX5mqHbaXgXXUsYq28kpGDvbP77rroKhTDIqSKq9xPyk4y/Hr1cJorvltfuH5gHcC6r5pWt6UAVRmtZWQacD0OWDFYMJzJbrRU8onE8exzoDdzIuku/w6M66/E3cV92B0CpVmzvwcsevSfihomxKA=
     - secure: SjZeRVR2A0j1zOCrwa0xV4FCsTG9OlenellR+sRJum5x8B8o15rK5GyIbQbiEJTk6A/m7dSec48GAyzAK5QAlydUKvy05IUMowvcCfGkPD0dsh8osmKK8yn54QSosG9t4uMAzbRpaXfz4s8mOj4Nw3WJ8qIp0UkiJ2hvf7U9Edk=
 language: node_js
