@@ -1,3 +1,21 @@
+GIT
+  remote: https://github.com/biril/sauce_ruby
+  revision: 3fc0314e96660f05fe36a195e0b7f88ebd66bf56
+  branch: requireForwardable
+  specs:
+    sauce (3.5.4)
+      childprocess (>= 0.1.6)
+      cmdparse (>= 2.0.2)
+      highline (>= 1.5.0)
+      json (>= 1.2.0)
+      net-http-persistent
+      net-ssh
+      net-ssh-gateway
+      parallel_tests (= 1.0.6)
+      rest-client
+      sauce_whisk (~> 0.0.11)
+      selenium-webdriver (>= 0.1.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -47,18 +65,6 @@ GEM
       rspec-support (~> 3.2.0)
     rspec-support (3.2.1)
     rubyzip (1.1.7)
-    sauce (3.5.4)
-      childprocess (>= 0.1.6)
-      cmdparse (>= 2.0.2)
-      highline (>= 1.5.0)
-      json (>= 1.2.0)
-      net-http-persistent
-      net-ssh
-      net-ssh-gateway
-      parallel_tests (= 1.0.6)
-      rest-client
-      sauce_whisk (~> 0.0.11)
-      selenium-webdriver (>= 0.1.2)
     sauce-connect (3.5.0)
       sauce (~> 3.5)
     sauce_whisk (0.0.17)
@@ -80,6 +86,6 @@ DEPENDENCIES
   capybara (~> 2.4.4)
   parallel_tests
   rspec (~> 3.2.0)
-  sauce (~> 3.5.4)
+  sauce!
   sauce-connect (~> 3.5.0)
   selenium-webdriver (~> 2.44.0)
