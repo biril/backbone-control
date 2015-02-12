@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <title>BackboneControl.Button test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="fixture">
+    <div class="modifySection">
+      <div class="modifier enableSwitch1">Enable switch 1</div>
+      <div class="modifier disableSwitch1">Disable switch 1</div>
+      <div class="modifier enableSwitch2">Enable switch 2</div>
+      <div class="modifier disableSwitch2">Disable switch 2</div>
+    </div>
+    <div class="testSection">
+      <div class="switch1"></div>
+      <div class="switch2"></div>
+
+      <div class="stateDisplay">
+        <div class="switch1StateDisplay">Switch 1 state: <span class="output"></span></div>
+        <div class="switch2StateDisplay">Switch 2 state: <span class="output"></span></div>
+      </div>
+    </div>
+    <div style="clear:left"></div>
+  </div>
+
+  <script type="text/javascript" src="../vendor/require.js"></script>
+  <script>
+    /*global require */
+    require.config({
+      baseUrl: '../../lib',
+      paths: {
+        jquery:     '../test/vendor/jquery',
+        underscore: '../test/vendor/underscore',
+        backbone:   '../test/vendor/backbone',
+
+        test: '../test/Switch/app'
+      }
+    });
+    require(['test'], function (test) {
+      'use strict';
+      test.run();
+    });
+  </script>
+
+</body>
+</html>
