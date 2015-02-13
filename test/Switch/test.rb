@@ -14,7 +14,7 @@ fixture_selector = {
   disable_switch2_modifier: '.modifier.disableSwitch2'
 }
 
-describe 'the switch control', :type => :feature do
+describe 'the switch control', :type => :feature, sauce: ENV['RUN_ON_SAUCE'] do
 
   #
 
