@@ -6,6 +6,5 @@ env:
 language: node_js
 node_js:
   - "0.10"
-  - iojs
 addons:
   sauce_connect: true
