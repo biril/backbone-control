@@ -29,7 +29,7 @@
     "testPrepare": "bundle install",
     "testButton": "lessc --verbose test/Button/style.less test/Button/style.css && (ws -f none & WSPID=$! ; bundle exec rspec -fd test/Button/test.rb ; kill $WSPID)",
     "testSwitch": "lessc --verbose test/Switch/style.less test/Switch/style.css && (ws -f none & WSPID=$! ; bundle exec rspec -fd test/Switch/test.rb ; kill $WSPID)",
-    "test": "npm run-script testPrepare && npm run-script testButton; npm run-script testSwitch"
+    "test": "npm run-script testPrepare && npm run-script testButton && npm run-script testSwitch"
   },
   "engines": {
     "node": ">=0.10"
