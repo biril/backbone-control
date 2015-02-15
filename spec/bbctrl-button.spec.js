@@ -17,19 +17,11 @@ define(['backbone', 'bbctrl-button'], function (Backbone, Button) {
     //  keeping the rest of the suite unaffected
     clickButton = function (button) {
       button.$el.click();
-    },
-    getButtonLabel = function (button) {
-      return button.$('.bbctrlButton_label').text();
     };
 
   //
 
   describe('The button control', function () {
-
-    it('should render with given label', function () {
-      var button = new Button({ label: 'Test Button' });
-      expect(getButtonLabel(button)).toEqual('Test Button');
-    });
 
     it('should trigger clicked-event when clicked', function () {
       var button, isButtonClickHandlerInvoked;

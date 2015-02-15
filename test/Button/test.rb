@@ -35,6 +35,13 @@ describe 'the button control', type: :feature, sauce: ENV['RUN_ON_SAUCE'] do
     end
   end
 
+  matcher :have_label do |expected|
+    match do |actual|
+      label = actual.find(button_selector[:label])
+      label && label.text == expected
+    end
+  end
+
   #
 
   before do
@@ -50,10 +57,10 @@ describe 'the button control', type: :feature, sauce: ENV['RUN_ON_SAUCE'] do
 
   it 'should render with given label' do
     within(fixture_selector[:increase_button]) do
-      expect(find(button_selector[:label])).to have_text('Increase count')
+      expect(find(button_selector[:root])).to have_label('Increase count')
     end
     within(fixture_selector[:decrease_button]) do
-      expect(find(button_selector[:label])).to have_text('Decrease count')
+      expect(find(button_selector[:root])).to have_label('Decrease count')
     end
   end
 
