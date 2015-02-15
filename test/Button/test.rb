@@ -16,9 +16,12 @@ fixture_selector = {
 
 describe 'the button control', type: :feature, sauce: ENV['RUN_ON_SAUCE'] do
 
-  # Matchers to use when evaluating that the button appears as enabled / disabled. Modifying the
-  #  appearance of the button controls is indeed expected to break these tests - however tweaking
-  #  these matchers appropriately should be enough for all tests to pass again
+  # Matchers facilitating the evaluation of the control's appearance. These may serve as an
+  #  effective indication of all the control's visual aspects that the suite tests for. They
+  #  necessarily make use of selenium native methods, for example to acquire the computed style of
+  #  elements and compare against known styles. In this sense, they also define (in a minimalist
+  #  fashion) the adjustments in the test suite that would be necessary to account for changes in
+  #  the control's style
 
   matcher :appear_as_enabled do
     match do |actual|
