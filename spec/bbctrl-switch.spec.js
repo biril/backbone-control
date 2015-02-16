@@ -3,6 +3,24 @@
 define(['backbone', 'bbctrl-switch'], function (Backbone, Switch) {
   'use strict';
 
+  //
+
+  var
+
+    // Helper methods to simulate user interaction with the control. These may serve as an
+    //  effective indication of all the interactions that the control supports (and the suite tests
+    //  for). They unavoidably leverage privileged knowlege of control internals, for example
+    //  reaching into the control's document, to invoke a click on an appropriately named class. In
+    //  this sense, they also serve as a means of isolating the most brittle part of the test suite
+    //  - that, which is coupled with the unit's implementation - into a small set of APIs. These
+    //  may be adjusted as needed to account for changes in the control's implementation while
+    //  keeping the rest of the suite unaffected
+    clickSwitch = function (theSwitch) {
+      theSwitch.$el.click();
+    };
+
+  //
+
   describe('The switch control', function () {
 
     it('should be set to off when initialized without model', function () {
@@ -38,7 +56,7 @@ define(['backbone', 'bbctrl-switch'], function (Backbone, Switch) {
         isSwitchSetRequestHandlerInvoked = true;
       });
 
-      theSwitch.$el.click();
+      clickSwitch(theSwitch);
 
       expect(isSwitchSetRequestHandlerInvoked).toBeTruthy();
     });
@@ -50,7 +68,7 @@ define(['backbone', 'bbctrl-switch'], function (Backbone, Switch) {
         isRequestSetToOn = attrs.value === true;
       });
 
-      theSwitch.$el.click();
+      clickSwitch(theSwitch);
 
       expect(isRequestSetToOn).toBeTruthy();
     });
@@ -65,7 +83,7 @@ define(['backbone', 'bbctrl-switch'], function (Backbone, Switch) {
         isRequestSetToOff = attrs.isTurnedOn === false;
       });
 
-      theSwitch.$el.click();
+      clickSwitch(theSwitch);
 
       expect(isRequestSetToOff).toBeTruthy();
     });
@@ -78,7 +96,7 @@ define(['backbone', 'bbctrl-switch'], function (Backbone, Switch) {
         isOtherSwitchSetRequestHandlerInvoked = true;
       });
 
-      theSwitch.$el.click();
+      clickSwitch(theSwitch);
 
       expect(isOtherSwitchSetRequestHandlerInvoked).toBeFalsy();
     });
@@ -93,9 +111,9 @@ define(['backbone', 'bbctrl-switch'], function (Backbone, Switch) {
         modelAttr: 'isOn'
       });
 
-      theSwitch.$el.click();
+      clickSwitch(theSwitch);
       expect(switchModel.get('isOn')).toBeFalsy();
-      theSwitch.$el.click();
+      clickSwitch(theSwitch);
       expect(switchModel.get('isOn')).toBeFalsy();
     });
 
@@ -109,9 +127,9 @@ define(['backbone', 'bbctrl-switch'], function (Backbone, Switch) {
       });
 
       expect(switchModel.get('isOn')).toBeFalsy();
-      theSwitch.$el.click();
+      clickSwitch(theSwitch);
       expect(switchModel.get('isOn')).toBeTruthy();
-      theSwitch.$el.click();
+      clickSwitch(theSwitch);
       expect(switchModel.get('isOn')).toBeFalsy();
     });
 
@@ -125,7 +143,7 @@ define(['backbone', 'bbctrl-switch'], function (Backbone, Switch) {
         isSwitchSetRequestHandlerInvoked = true;
       });
 
-      theSwitch.$el.click();
+      clickSwitch(theSwitch);
 
       expect(isSwitchSetRequestHandlerInvoked).toBeFalsy();
     });
@@ -138,7 +156,7 @@ define(['backbone', 'bbctrl-switch'], function (Backbone, Switch) {
         isSwitchSetRequestHandlerInvoked = true;
       });
 
-      theSwitch.$el.click();
+      clickSwitch(theSwitch);
 
       expect(isSwitchSetRequestHandlerInvoked).toBeFalsy();
     });
@@ -153,7 +171,7 @@ define(['backbone', 'bbctrl-switch'], function (Backbone, Switch) {
         isSwitchSetRequestHandlerInvoked = true;
       });
 
-      theSwitch.$el.click();
+      clickSwitch(theSwitch);
 
       expect(isSwitchSetRequestHandlerInvoked).toBeFalsy();
     });
@@ -167,7 +185,7 @@ define(['backbone', 'bbctrl-switch'], function (Backbone, Switch) {
       });
 
       theSwitch.enable();
-      theSwitch.$el.click();
+      clickSwitch(theSwitch);
 
       expect(isSwitchSetRequestHandlerInvoked).toBeTruthy();
     });
@@ -181,7 +199,7 @@ define(['backbone', 'bbctrl-switch'], function (Backbone, Switch) {
       });
 
       theSwitch.disable(false);
-      theSwitch.$el.click();
+      clickSwitch(theSwitch);
 
       expect(isSwitchSetRequestHandlerInvoked).toBeTruthy();
     });
@@ -196,7 +214,7 @@ define(['backbone', 'bbctrl-switch'], function (Backbone, Switch) {
       });
 
       uiState.set({ isDisabled: false });
-      theSwitch.$el.click();
+      clickSwitch(theSwitch);
 
       expect(isSwitchSetRequestHandlerInvoked).toBeTruthy();
     });
