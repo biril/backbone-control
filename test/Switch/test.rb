@@ -40,14 +40,14 @@ describe 'the switch control', :type => :feature, sauce: ENV['RUN_ON_SAUCE'] do
   matcher :appear_as_enabled do
     match do |actual|
       handle = actual.find(switch_selector[:handle])
-      handle.native.style('background-color') == 'rgba(93, 147, 226, 1)'; # == #5D93E2
+      handle.native.style('background-color') == 'rgba(93, 147, 226, 1)' # == #5D93E2
     end
   end
 
   matcher :appear_as_disabled do
     match do |actual|
       handle = actual.find(switch_selector[:handle])
-      handle.native.style('background-color') == 'rgba(153, 172, 200, 1)'; # == #99ACC8
+      handle.native.style('background-color') == 'rgba(153, 172, 200, 1)' # == #99ACC8
     end
   end
 
