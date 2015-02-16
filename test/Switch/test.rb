@@ -51,6 +51,14 @@ describe 'the switch control', :type => :feature, sauce: ENV['RUN_ON_SAUCE'] do
     end
   end
 
+  matcher :appear_as_hovered do
+    match do |actual|
+      handle = actual.find(switch_selector[:handle])
+      actual.hover()
+      handle.native.style('background-color') == 'rgba(56, 121, 217, 1)' # == #3879d9
+    end
+  end
+
   #
 
   before do
@@ -147,6 +155,19 @@ describe 'the switch control', :type => :feature, sauce: ENV['RUN_ON_SAUCE'] do
 
     within(fixture_selector[:switch2]) do
       expect(find(switch_selector[:root])).to appear_as_disabled
+    end
+  end
+
+  it 'should appear as hovered when hovered' do
+    within(fixture_selector[:switch1]) do
+     expect(find(switch_selector[:root])).to appear_as_hovered
+    end
+  end
+
+  it 'should not appear as hovered when hovered and disabled' do
+    # Switch2 is initialized to the disabled state
+    within(fixture_selector[:switch2]) do
+      expect(find(switch_selector[:root])).to_not appear_as_hovered
     end
   end
 

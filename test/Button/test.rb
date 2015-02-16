@@ -35,6 +35,13 @@ describe 'the button control', type: :feature, sauce: ENV['RUN_ON_SAUCE'] do
     end
   end
 
+  matcher :appear_as_hovered do
+    match do |actual|
+      actual.hover()
+      actual.native.style('background-color') == 'rgba(56, 121, 217, 1)' # == #3879d9
+    end
+  end
+
   matcher :have_label do |expected|
     match do |actual|
       label = actual.find(button_selector[:label])
@@ -121,6 +128,19 @@ describe 'the button control', type: :feature, sauce: ENV['RUN_ON_SAUCE'] do
 
     within(fixture_selector[:decrease_button]) do
       expect(find(button_selector[:root])).to appear_as_disabled
+    end
+  end
+
+  it 'should appear as hovered when hovered' do
+    within(fixture_selector[:increase_button]) do
+      expect(find(button_selector[:root])).to appear_as_hovered
+    end
+  end
+
+  it 'should not appear as hovered when hovered and disabled' do
+    # The decrease-button is initialized to the disabled state
+    within(fixture_selector[:decrease_button]) do
+      expect(find(button_selector[:root])).to_not appear_as_hovered
     end
   end
 
