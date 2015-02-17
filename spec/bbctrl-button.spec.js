@@ -23,113 +23,108 @@ define(['backbone', 'bbctrl-button'], function (Backbone, Button) {
 
   describe('The button control', function () {
 
-    it('should trigger clicked-event when clicked', function () {
-      var button, isButtonClickHandlerInvoked;
-      button = new Button();
-      button.on('clicked', function () {
-        isButtonClickHandlerInvoked = true;
+    describe('in terms of misc events', function () {
+
+      it('should trigger clicked-event when clicked', function () {
+        var button, isButtonClickHandlerInvoked;
+        button = new Button();
+        button.on('clicked', function () {
+          isButtonClickHandlerInvoked = true;
+        });
+
+        clickButton(button);
+
+        expect(isButtonClickHandlerInvoked).toBeTruthy();
       });
 
-      clickButton(button);
-
-      expect(isButtonClickHandlerInvoked).toBeTruthy();
     });
 
-    it('should not cause other instances to trigger clicked-event when clicked', function () {
-      var button, otherButton, isOtherButtonClickHandlerInvoked;
-      button = new Button();
-      otherButton = new Button();
-      otherButton.on('clicked', function () {
-        isOtherButtonClickHandlerInvoked = true;
+    describe('in terms of disabled behaviour', function () {
+
+      it('should not trigger clicked-event when clicked (.disable())', function () {
+        var button, isButtonClickHandlerInvoked;
+        button = new Button();
+        button.disable();
+        button.on('clicked', function () {
+          isButtonClickHandlerInvoked = true;
+        });
+
+        clickButton(button);
+
+        expect(isButtonClickHandlerInvoked).toBeFalsy();
       });
 
-      clickButton(button);
+      it('should not trigger clicked-event when clicked (.enable(false))', function () {
+        var button, isButtonClickHandlerInvoked;
+        button = new Button();
+        button.enable(false);
+        button.on('clicked', function () {
+          isButtonClickHandlerInvoked = true;
+        });
 
-      expect(isOtherButtonClickHandlerInvoked).toBeFalsy();
-    });
+        clickButton(button);
 
-    it('should not trigger clicked-event when disabled (.disable())', function () {
-      var button, isButtonClickHandlerInvoked;
-      button = new Button();
-      button.disable();
-      button.on('clicked', function () {
-        isButtonClickHandlerInvoked = true;
+        expect(isButtonClickHandlerInvoked).toBeFalsy();
       });
 
-      clickButton(button);
+      it('should not trigger clicked-event when clicked (uiState.set({ isDisabled: true }))', function () {
+        var button, isButtonClickHandlerInvoked;
+        button = new Button({
+          uiState: new Backbone.Model({ isDisabled: true })
+        });
+        button.enable(false);
+        button.on('clicked', function () {
+          isButtonClickHandlerInvoked = true;
+        });
 
-      expect(isButtonClickHandlerInvoked).toBeFalsy();
-    });
+        clickButton(button);
 
-    it('should not trigger clicked-event when disabled (.enable(false))', function () {
-      var button, isButtonClickHandlerInvoked;
-      button = new Button();
-      button.enable(false);
-      button.on('clicked', function () {
-        isButtonClickHandlerInvoked = true;
+        expect(isButtonClickHandlerInvoked).toBeFalsy();
       });
 
-      clickButton(button);
+      it('should trigger clicked-event when clicked when re-enabled (.enable())', function () {
+        var button, isButtonClickHandlerInvoked;
+        button = new Button();
+        button.disable();
+        button.on('clicked', function () {
+          isButtonClickHandlerInvoked = true;
+        });
 
-      expect(isButtonClickHandlerInvoked).toBeFalsy();
-    });
+        button.enable();
+        clickButton(button);
 
-    it('should not trigger clicked-event when disabled (uiState.set({ isDisabled: true }))', function () {
-      var button, isButtonClickHandlerInvoked;
-      button = new Button({
-        uiState: new Backbone.Model({ isDisabled: true })
-      });
-      button.enable(false);
-      button.on('clicked', function () {
-        isButtonClickHandlerInvoked = true;
-      });
-
-      clickButton(button);
-
-      expect(isButtonClickHandlerInvoked).toBeFalsy();
-    });
-
-    it('should trigger clicked-event when clicked after being re-enabled (.enable())', function () {
-      var button, isButtonClickHandlerInvoked;
-      button = new Button();
-      button.disable();
-      button.on('clicked', function () {
-        isButtonClickHandlerInvoked = true;
+        expect(isButtonClickHandlerInvoked).toBeTruthy();
       });
 
-      button.enable();
-      clickButton(button);
+      it('should trigger clicked-event when clicked when re-enabled (.disable(false))', function () {
+        var button, isButtonClickHandlerInvoked;
+        button = new Button();
+        button.disable();
+        button.on('clicked', function () {
+          isButtonClickHandlerInvoked = true;
+        });
 
-      expect(isButtonClickHandlerInvoked).toBeTruthy();
-    });
+        button.disable(false);
+        clickButton(button);
 
-    it('should trigger clicked-event when clicked after being re-enabled (.disable(false))', function () {
-      var button, isButtonClickHandlerInvoked;
-      button = new Button();
-      button.disable();
-      button.on('clicked', function () {
-        isButtonClickHandlerInvoked = true;
+        expect(isButtonClickHandlerInvoked).toBeTruthy();
       });
 
-      button.disable(false);
-      clickButton(button);
+      it('should trigger clicked-event when clicked when re-enabled (uiState.set({ isDisabled: false }))', function () {
+        var button, uiState, isButtonClickHandlerInvoked;
+        uiState = new Backbone.Model({ isDisabled: true });
+        button = new Button({ uiState: uiState });
+        button.disable();
+        button.on('clicked', function () {
+          isButtonClickHandlerInvoked = true;
+        });
 
-      expect(isButtonClickHandlerInvoked).toBeTruthy();
-    });
+        uiState.set({ isDisabled: false });
+        clickButton(button);
 
-    it('should trigger clicked-event when clicked after being re-enabled (uiState.set({ isDisabled: false }))', function () {
-      var button, uiState, isButtonClickHandlerInvoked;
-      uiState = new Backbone.Model({ isDisabled: true });
-      button = new Button({ uiState: uiState });
-      button.disable();
-      button.on('clicked', function () {
-        isButtonClickHandlerInvoked = true;
+        expect(isButtonClickHandlerInvoked).toBeTruthy();
       });
 
-      uiState.set({ isDisabled: false });
-      clickButton(button);
-
-      expect(isButtonClickHandlerInvoked).toBeTruthy();
     });
 
   });
