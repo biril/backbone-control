@@ -81,7 +81,8 @@
   //// Require specs and run suite once loaded
   require([
     '../spec/bbctrl-button.spec',
-    '../spec/bbctrl-switch.spec'
+    '../spec/bbctrl-switch.spec',
+    '../spec/bbctrl-text-field.spec'
   ], function () {
     htmlReporter.initialize();
     window.jasmine.getEnv().execute();
