@@ -107,6 +107,106 @@ define (['backbone', 'bbctrl-text-field'], function (Backbone, TextField) {
 
     });
 
+    describe('in terms of disabled behaviour', function () {
+
+      it('should not trigger set-request when typed into (.disable())', function () {
+        var textField, isSetRequestHandlerInvoked;
+        textField = new TextField();
+        textField.on('request:set', function () {
+          isSetRequestHandlerInvoked = true;
+        });
+
+        textField.disable();
+        typeIntoTextField(textField, ' ');
+
+        expect(isSetRequestHandlerInvoked).toBeFalsy();
+      });
+
+      it('should not trigger set-request when typed into (.enable(false))', function () {
+        var textField, isSetRequestHandlerInvoked;
+        textField = new TextField();
+        textField.on('request:set', function () {
+          isSetRequestHandlerInvoked = true;
+        });
+
+        textField.enable(false);
+        typeIntoTextField(textField, ' ');
+
+        expect(isSetRequestHandlerInvoked).toBeFalsy();
+      });
+
+      it('should not trigger set-request when typed into (initialized with uiState: { isDisabled: true })', function () {
+        var textField, isSetRequestHandlerInvoked;
+        textField = new TextField({
+          uiState: new Backbone.Model({ isDisabled: true })
+        });
+        textField.on('request:set', function () {
+          isSetRequestHandlerInvoked = true;
+        });
+
+        typeIntoTextField(textField, ' ');
+
+        expect(isSetRequestHandlerInvoked).toBeFalsy();
+      });
+
+      it('should not trigger set-request when typed into (uiState.set({ isDisabled: true }))', function () {
+        var textField, uiState, isSetRequestHandlerInvoked;
+        uiState = new Backbone.Model({ isDisabled: false });
+        textField = new TextField({ uiState: uiState });
+        textField.on('request:set', function () {
+          isSetRequestHandlerInvoked = true;
+        });
+
+        uiState.set({ isDisabled: true });
+        typeIntoTextField(textField, ' ');
+
+        expect(isSetRequestHandlerInvoked).toBeFalsy();
+      });
+
+      it('should trigger set-request when re-enabled (.enable()) and typed into', function () {
+        var textField, isSetRequestHandlerInvoked;
+        textField = new TextField();
+        textField.disable();
+        textField.on('request:set', function () {
+          isSetRequestHandlerInvoked = true;
+        });
+
+        textField.enable();
+        typeIntoTextField(textField, ' ');
+
+        expect(isSetRequestHandlerInvoked).toBeTruthy();
+      });
+
+      it('should trigger set-request when re-enabled (.disable(false)) and typed into', function () {
+        var textField, isSetRequestHandlerInvoked;
+        textField = new TextField();
+        textField.disable();
+        textField.on('request:set', function () {
+          isSetRequestHandlerInvoked = true;
+        });
+
+        textField.disable(false);
+        typeIntoTextField(textField, ' ');
+
+        expect(isSetRequestHandlerInvoked).toBeTruthy();
+      });
+
+      it('should trigger set-request when re-enabled (uiState.set({ isDisabled: true })) and typed into', function () {
+        var textField, uiState, isSetRequestHandlerInvoked;
+        uiState = new Backbone.Model({ isDisabled: false });
+        textField = new TextField({ uiState: uiState });
+        textField.on('request:set', function () {
+          isSetRequestHandlerInvoked = true;
+        });
+
+        uiState.set({ isDisabled: false });
+        typeIntoTextField(textField, ' ');
+
+        expect(isSetRequestHandlerInvoked).toBeTruthy();
+      });
+
+    });
+
   });
 
 });
