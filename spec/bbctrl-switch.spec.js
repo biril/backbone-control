@@ -131,38 +131,37 @@ define(['backbone', 'bbctrl-switch'], function (Backbone, Switch) {
     ///
     describe('in terms of disabled behaviour', function () {
 
-      it('should not trigger set-request when disabled (.disable())', function () {
+      it('should not trigger set-request when clicked (.disable())', function () {
         var theSwitch, isSwitchSetRequestHandlerInvoked;
         theSwitch = new Switch();
+        theSwitch.on('request:set', function () {
+          isSwitchSetRequestHandlerInvoked = true;
+        });
+
         theSwitch.disable();
-        theSwitch.on('request:set', function () {
-          isSwitchSetRequestHandlerInvoked = true;
-        });
-
         clickSwitch(theSwitch);
 
         expect(isSwitchSetRequestHandlerInvoked).toBeFalsy();
       });
 
-      it('should not trigger set-request when disabled (.enable(false))', function () {
+      it('should not trigger set-request when clicked (.enable(false))', function () {
         var theSwitch, isSwitchSetRequestHandlerInvoked;
         theSwitch = new Switch();
-        theSwitch.enable(false);
         theSwitch.on('request:set', function () {
           isSwitchSetRequestHandlerInvoked = true;
         });
 
+        theSwitch.enable(false);
         clickSwitch(theSwitch);
 
         expect(isSwitchSetRequestHandlerInvoked).toBeFalsy();
       });
 
-      it('should not trigger set-request when disabled (uiState.set({ isDisabled: true }))', function () {
+      it('should not trigger set-request when clicked (initialized with uiState: { isDisabled: true })', function () {
         var theSwitch, isSwitchSetRequestHandlerInvoked;
         theSwitch = new Switch({
           uiState: new Backbone.Model({ isDisabled: true })
         });
-        theSwitch.enable(false);
         theSwitch.on('request:set', function () {
           isSwitchSetRequestHandlerInvoked = true;
         });
@@ -172,7 +171,21 @@ define(['backbone', 'bbctrl-switch'], function (Backbone, Switch) {
         expect(isSwitchSetRequestHandlerInvoked).toBeFalsy();
       });
 
-      it('should trigger set-request when clicked after being re-enabled (.enable())', function () {
+      it('should not trigger set-request when clicked (uiState.set({ isDisabled: true }))', function () {
+        var theSwitch, uiState, isSwitchSetRequestHandlerInvoked;
+        uiState = new Backbone.Model({ isDisabled: false });
+        theSwitch = new Switch({ uiState: uiState });
+        theSwitch.on('request:set', function () {
+          isSwitchSetRequestHandlerInvoked = true;
+        });
+
+        uiState.set({ isDisabled: true });
+        clickSwitch(theSwitch);
+
+        expect(isSwitchSetRequestHandlerInvoked).toBeFalsy();
+      });
+
+      it('should trigger set-request when re-enabled (.enable()) and clicked', function () {
         var theSwitch, isSwitchSetRequestHandlerInvoked;
         theSwitch = new Switch();
         theSwitch.disable();
@@ -186,7 +199,7 @@ define(['backbone', 'bbctrl-switch'], function (Backbone, Switch) {
         expect(isSwitchSetRequestHandlerInvoked).toBeTruthy();
       });
 
-      it('should trigger set-request when clicked after being re-enabled (.disable(false))', function () {
+      it('should trigger set-request when re-enabled (.disable(false)) and clicked', function () {
         var theSwitch, isSwitchSetRequestHandlerInvoked;
         theSwitch = new Switch();
         theSwitch.disable();
@@ -200,11 +213,10 @@ define(['backbone', 'bbctrl-switch'], function (Backbone, Switch) {
         expect(isSwitchSetRequestHandlerInvoked).toBeTruthy();
       });
 
-      it('should trigger set-request when clicked after being re-enabled (uiState.set({ isDisabled: false }))', function () {
+      it('should trigger set-request when re-enabled (uiState.set({ isDisabled: false })) and clicked', function () {
         var theSwitch, uiState, isSwitchSetRequestHandlerInvoked;
         uiState = new Backbone.Model({ isDisabled: true });
         theSwitch = new Switch({ uiState: uiState });
-        theSwitch.disable();
         theSwitch.on('request:set', function () {
           isSwitchSetRequestHandlerInvoked = true;
         });
