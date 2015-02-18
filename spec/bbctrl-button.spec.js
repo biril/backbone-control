@@ -44,11 +44,11 @@ define(['backbone', 'bbctrl-button'], function (Backbone, Button) {
       it('should not trigger clicked-event when clicked (.disable())', function () {
         var button, isButtonClickHandlerInvoked;
         button = new Button();
-        button.disable();
         button.on('clicked', function () {
           isButtonClickHandlerInvoked = true;
         });
 
+        button.disable();
         clickButton(button);
 
         expect(isButtonClickHandlerInvoked).toBeFalsy();
@@ -57,7 +57,21 @@ define(['backbone', 'bbctrl-button'], function (Backbone, Button) {
       it('should not trigger clicked-event when clicked (.enable(false))', function () {
         var button, isButtonClickHandlerInvoked;
         button = new Button();
+        button.on('clicked', function () {
+          isButtonClickHandlerInvoked = true;
+        });
+
         button.enable(false);
+        clickButton(button);
+
+        expect(isButtonClickHandlerInvoked).toBeFalsy();
+      });
+
+      it('should not trigger clicked-event when clicked (initialized with uiState: { isDisabled: true })', function () {
+        var button, isButtonClickHandlerInvoked;
+        button = new Button({
+          uiState: new Backbone.Model({ isDisabled: true })
+        });
         button.on('clicked', function () {
           isButtonClickHandlerInvoked = true;
         });
@@ -68,21 +82,20 @@ define(['backbone', 'bbctrl-button'], function (Backbone, Button) {
       });
 
       it('should not trigger clicked-event when clicked (uiState.set({ isDisabled: true }))', function () {
-        var button, isButtonClickHandlerInvoked;
-        button = new Button({
-          uiState: new Backbone.Model({ isDisabled: true })
-        });
-        button.enable(false);
+        var button, uiState, isButtonClickHandlerInvoked;
+        uiState = new Backbone.Model({ isDisabled: false });
+        button = new Button({ uiState: uiState });
         button.on('clicked', function () {
           isButtonClickHandlerInvoked = true;
         });
 
+        uiState.set({ isDisabled: true });
         clickButton(button);
 
         expect(isButtonClickHandlerInvoked).toBeFalsy();
       });
 
-      it('should trigger clicked-event when clicked when re-enabled (.enable())', function () {
+      it('should trigger clicked-event when re-enabled (.enable()) and clicked', function () {
         var button, isButtonClickHandlerInvoked;
         button = new Button();
         button.disable();
@@ -96,7 +109,7 @@ define(['backbone', 'bbctrl-button'], function (Backbone, Button) {
         expect(isButtonClickHandlerInvoked).toBeTruthy();
       });
 
-      it('should trigger clicked-event when clicked when re-enabled (.disable(false))', function () {
+      it('should trigger clicked-event when re-enabled (.disable(false)) and clicked', function () {
         var button, isButtonClickHandlerInvoked;
         button = new Button();
         button.disable();
@@ -110,11 +123,10 @@ define(['backbone', 'bbctrl-button'], function (Backbone, Button) {
         expect(isButtonClickHandlerInvoked).toBeTruthy();
       });
 
-      it('should trigger clicked-event when clicked when re-enabled (uiState.set({ isDisabled: false }))', function () {
+      it('should trigger clicked-event when re-enabled (uiState.set({ isDisabled: false })) and clicked', function () {
         var button, uiState, isButtonClickHandlerInvoked;
         uiState = new Backbone.Model({ isDisabled: true });
         button = new Button({ uiState: uiState });
-        button.disable();
         button.on('clicked', function () {
           isButtonClickHandlerInvoked = true;
         });
