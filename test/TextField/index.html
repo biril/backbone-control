@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <title>BackboneControl.TextField test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="fixture">
+    <div class="modifySection">
+      <div class="modifier enableTextField1">Enable text field 1</div>
+      <div class="modifier disableTextField1">Disable text field 1</div>
+      <div class="modifier enableTextField2">Enable text field 2</div>
+      <div class="modifier disableTextField2">Disable text field 2</div>
+    </div>
+    <div class="testSection">
+      <div class="textField1"></div>
+      <div class="textField2"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="../vendor/require.js"></script>
+  <script>
+    /*global require */
+    require.config({
+      baseUrl: '../../lib',
+      paths: {
+        jquery:     '../test/vendor/jquery',
+        underscore: '../test/vendor/underscore',
+        backbone:   '../test/vendor/backbone',
+
+        test: '../test/TextField/app'
+      }
+    });
+    require(['test'], function (test) {
+      'use strict';
+      test.run();
+    });
+  </script>
+
+</body>
+</html>
