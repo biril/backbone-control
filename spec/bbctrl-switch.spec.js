@@ -229,6 +229,31 @@ define(['backbone', 'bbctrl-switch'], function (Backbone, Switch) {
 
     });
 
+    describe('in terms of to/from model-attr converters', function () {
+
+      it ('should convert to/from model-attr', function () {
+        var theSwitch, model, requestedValueToSet;
+        model = new Backbone.Model({ direction: 'right' });
+        theSwitch = new Switch({
+          model: model,
+          modelAttr: 'direction',
+          fromModelAttrVal: function (direction) {
+            return direction === 'right';
+          },
+          toModelAttrVal: function (isOn) {
+            return isOn ? 'right' : 'left';
+          }
+        });
+        theSwitch.on('request:set', function (attrs) {
+          requestedValueToSet = attrs.direction;
+        });
+
+        clickSwitch(theSwitch);
+        expect(requestedValueToSet).toEqual('left');
+      });
+
+    });
+
   });
 
 });
