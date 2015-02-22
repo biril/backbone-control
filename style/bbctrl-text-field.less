@@ -8,3 +8,13 @@
   padding: 6px 5px;
   border: 1px solid #99ACC8;
 }
+
+.bbctrlTextField:hover .bbctrlTextField_input {
+  border-color: #3879d9;
+}
+
+.bbctrlTextField_isDisabled {
+  &.bbctrlTextField:hover .bbctrlTextField_input {
+    border-color: #99ACC8;
+  }
+}

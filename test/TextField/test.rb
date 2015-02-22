@@ -37,6 +37,31 @@ describe 'the Text Field control', :type => :feature, sauce: ENV['RUN_ON_SAUCE']
     end
   end
 
+  matcher :appear_as_hovered do
+    # Unfortunately, Selenium's .style('border-color') will return emptyness.
+    #  We'll have to check the border-top/right/bottom/left-color one by one:
+    directions = %w{ top right bottom left }
+    input_border_colors = nil
+    match do |actual|
+      actual.hover()
+      input = actual.find(textField_selector[:input])
+      input_border_colors = directions.map do |direction|
+        input.native.style("border-#{direction}-color")
+      end
+      input_border_colors.all? do |color|
+        color == 'rgba(56, 121, 217, 1)' # == #3879d9
+      end
+    end
+    failure_message do |actual|
+      "expected #{actual} to appear as hovered: To have border-#{directions.join('/')}-color: "\
+      "rgba(56, 121, 217, 1). Actuals: #{input_border_colors.join(', ')}"
+    end
+    failure_message_when_negated do |actual|
+      "expected #{actual} to not appear as hovered: To have border-#{directions.join('/')}-color: "\
+      "dif. than rgba(56, 121, 217, 1). Actuals: #{input_border_colors.join(', ')}"
+    end
+  end
+
   #
 
   before do
@@ -99,6 +124,19 @@ describe 'the Text Field control', :type => :feature, sauce: ENV['RUN_ON_SAUCE']
 
     within(fixture_selector[:textField2]) do
       expect(find(textField_selector[:root])).to appear_as_disabled
+    end
+  end
+
+  it 'should appear as hovered when hovered' do
+    within(fixture_selector[:textField1]) do
+     expect(find(textField_selector[:root])).to appear_as_hovered
+    end
+  end
+
+  it 'should not appear as hovered when hovered and disabled' do
+    # TextField2 is initialized to the disabled state
+    within(fixture_selector[:textField2]) do
+      expect(find(textField_selector[:root])).to_not appear_as_hovered
     end
   end
 
