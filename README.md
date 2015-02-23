@@ -31,8 +31,8 @@ var user = new Backbone.Model({
 //  notify-for-updates status. Each control is associated with some specific
 //  attribute of the user model. Additionally, through the isAutoWriteToModel
 //  attribute, they're all set up with two-way data binding, i.e. any changes on
-//  the control will be automatically persisted on the model. Contrast this to
-//  how the email-address text field is used further down
+//  the control will be automatically persisted on the model. (Contrast this to
+//  how the email-address text field is used further down)
 var userNameTextField = new TextField({
     model: user,
     modelAttr: 'name',
@@ -61,11 +61,11 @@ var notifyForUpdatesSwitch = new Switch({
 $('.notifyForUpdates').append(notifyForUpdatesSwitch.el);
 
 // For the user's email-address text field we only want one-way data-binding
-//  (notice the isAutoWriteToModel attribute set to false). That is to say, the
-//  view should always reflect the model's state but changes on the view should
-//  not be automatically persisted on the model. Instead, a listener is set up
-//  for the controls 'submitted' / 'blurred' events, which performs a validation
-//  step before commiting the value to the model
+//  (notice that the isAutoWriteToModel attribute is set to false). That is to
+//  say, the view should always reflect the model's state but changes on the view
+//  should not be automatically persisted on the model. Instead, a listener is
+//  set up for the controls 'submitted' / 'blurred' events, which performs a
+//  validation step before commiting the value to the model
 var userEmailAddressTextField = new TextField({
     model: user,
     modelAttr: 'emailAddress',
@@ -78,9 +78,9 @@ userEmailTextField.on('submitted blurred', function (attrs) {
   }
 });
 
-// The button is a state-less view, not associated with any model. A listener
-//  is set up for the button's 'clicked' event, which saves the current state
-//  of the model
+// The button is a stateless view, not associated with any model. A listener
+//  is set up for the button's 'clicked' event, which saves the model's
+//  current state
 var submitButton = new TextField({ label: 'Apply Changes' });
 $('.submit', submitButton.el);
 submitButton.on('clicked', function () {
