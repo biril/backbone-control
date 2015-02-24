@@ -30,11 +30,12 @@
   },
   "scripts": {
     "lint": "jshint --show-non-errors lib/*.js spec/*.js",
+    "spec": "node spec/specrunner.node.js",
     "testPrepare": "bundle install",
     "testButton": "lessc --verbose test/Button/style.less test/Button/style.css && (ws -f none & WSPID=$! ; bundle exec rspec -fd test/Button/test.rb ; EC=$? ; kill $WSPID ; exit $EC)",
     "testSwitch": "lessc --verbose test/Switch/style.less test/Switch/style.css && (ws -f none & WSPID=$! ; bundle exec rspec -fd test/Switch/test.rb ; EC=$? ; kill $WSPID ; exit $EC)",
     "testTextField": "lessc --verbose test/TextField/style.less test/TextField/style.css && (ws -f none & WSPID=$! ; bundle exec rspec -fd test/TextField/test.rb ; EC=$? ; kill $WSPID ; exit $EC)",
-    "test": "npm run-script testPrepare && npm run-script testButton && npm run-script testSwitch && npm run-script testTextField"
+    "test": "npm run-script spec && npm run-script testPrepare && npm run-script testButton && npm run-script testSwitch && npm run-script testTextField"
   },
   "engines": {
     "node": ">=0.10"
