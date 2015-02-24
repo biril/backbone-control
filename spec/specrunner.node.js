@@ -1,11 +1,13 @@
 /* jshint node:true, strict:false */
 
 var
+  path = require('path'),
+
   requirejs = require('requirejs'),
 
   jasmine = (function () {
     var Jasmine = require('jasmine');
-    return new Jasmine({ projectBaseDir: require('path').resolve() });
+    return new Jasmine({ projectBaseDir: path.resolve() });
   }()),
 
   $ = (function () {
@@ -18,16 +20,16 @@ var
   Backbone = require('backbone'),
 
   specs = [
-    'spec/bbctrl-button.spec.js',
-    'spec/bbctrl-switch.spec.js',
-    'spec/bbctrl-text-field.spec.js'
+    '../spec/bbctrl-button.spec',
+    '../spec/bbctrl-switch.spec',
+    '../spec/bbctrl-text-field.spec'
   ];
 
 Backbone.$ = $;
 
 requirejs.config({
   nodeRequire: require,
-  baseUrl: 'lib',
+  baseUrl: path.resolve(__dirname, '../lib'),
   paths: {}
 });
 
