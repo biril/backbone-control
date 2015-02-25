@@ -9,7 +9,7 @@ require 'capybara/rspec'
 
 Capybara.run_server = false
 Capybara.default_driver = ENV['RUN_ON_SAUCE'] ? :sauce : :selenium
-Capybara.default_wait_time = 5
+Capybara.default_wait_time = 10
 
 Sauce.config do |c|
   c[:start_tunner] = ENV['RUN_ON_SAUCE']
