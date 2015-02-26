@@ -65,7 +65,7 @@ describe 'the Text Field control', :type => :feature, sauce: ENV['RUN_ON_SAUCE']
   #
 
   before do
-    visit 'localhost:8000/test/TextField'
+    visit 'http://localhost:8000/test/TextField'
     expect(page).to have_css(textField_selector[:root]) # Wait for textFieldes to render before proceeding
   end
 

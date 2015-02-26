@@ -52,7 +52,7 @@ describe 'the button control', type: :feature, sauce: ENV['RUN_ON_SAUCE'] do
   #
 
   before do
-    visit 'localhost:8000/test/Button'
+    visit 'http://localhost:8000/test/Button'
     expect(page).to have_css(button_selector[:root]) # Wait for buttons to render before proceeding
   end
 

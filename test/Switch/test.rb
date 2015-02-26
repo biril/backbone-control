@@ -62,7 +62,7 @@ describe 'the switch control', :type => :feature, sauce: ENV['RUN_ON_SAUCE'] do
   #
 
   before do
-    visit 'localhost:8000/test/Switch'
+    visit 'http://localhost:8000/test/Switch'
     expect(page).to have_css(switch_selector[:root]) # Wait for switches to render before proceeding
   end
 
