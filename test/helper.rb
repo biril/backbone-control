@@ -14,6 +14,13 @@ Capybara.default_wait_time = 10
 Sauce.config do |c|
   c[:start_tunner] = ENV['RUN_ON_SAUCE']
   c[:browsers] = [
-    ["OS X 10.10", "Chrome", "39"] # TBD
+
+    ['OS X 10.10', 'Chrome',  '40'],
+    ['OS X 10.10', 'Firefox', '35.0'],
+    ['OS X 10.10', 'Safari',  '8.0'],
+
+    ['Windows 7',  'Chrome',  '40'],
+    ['Windows 7',  'Firefox', '35.0'],
+    ['Windows 7',  'Safari',  '5.1']
   ]
 end
