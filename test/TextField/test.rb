@@ -43,7 +43,6 @@ describe 'the Text Field control', :type => :feature, sauce: ENV['RUN_ON_SAUCE']
     directions = %w{ top right bottom left }
     input_border_colors = nil
     match do |actual|
-      actual.hover()
       input = actual.find(textField_selector[:input])
       input_border_colors = directions.map do |direction|
         input.native.style("border-#{direction}-color")
@@ -128,16 +127,26 @@ describe 'the Text Field control', :type => :feature, sauce: ENV['RUN_ON_SAUCE']
   end
 
   it 'should appear as hovered when hovered' do
+    text_field = nil
     within(fixture_selector[:textField1]) do
-     expect(find(textField_selector[:root])).to appear_as_hovered
+      text_field = find(textField_selector[:root])
     end
+
+    text_field.hover()
+
+    expect(text_field).to appear_as_hovered
   end
 
   it 'should not appear as hovered when hovered and disabled' do
     # TextField2 is initialized to the disabled state
+    text_field = nil
     within(fixture_selector[:textField2]) do
-      expect(find(textField_selector[:root])).to_not appear_as_hovered
+      text_field = find(textField_selector[:root])
     end
+
+    text_field.hover()
+
+    expect(text_field).to_not appear_as_hovered
   end
 
 end
