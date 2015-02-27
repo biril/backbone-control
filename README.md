@@ -2,6 +2,7 @@ Backbone Control
 ================
 
 [![Build Status](https://travis-ci.org/biril/backbone-control.png)](https://travis-ci.org/biril/backbone-control)
+
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/backbone-control.svg)](https://saucelabs.com/u/backbone-control)
 
 Common UI elements, reinvented as data-driven Backbone components.
