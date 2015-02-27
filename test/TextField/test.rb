@@ -1,6 +1,6 @@
 require File.expand_path("../../helper", __FILE__)
 
-textField_selector = {
+text_field_selector = {
   root: '.bbctrlTextField',
   input: '.bbctrlTextField_input'
 }
@@ -26,14 +26,14 @@ describe 'the Text Field control', :type => :feature, sauce: ENV['RUN_ON_SAUCE']
   matcher :appear_as_enabled do
     match do |actual|
       # For now let's just check whether the input-element is indeed enabled
-      !actual.find(textField_selector[:input]).disabled?
+      !actual.find(text_field_selector[:input]).disabled?
     end
   end
 
   matcher :appear_as_disabled do
     match do |actual|
       # For now let's just check whether the input-element is indeed disabled
-      actual.find(textField_selector[:input]).disabled?
+      actual.find(text_field_selector[:input]).disabled?
     end
   end
 
@@ -43,7 +43,7 @@ describe 'the Text Field control', :type => :feature, sauce: ENV['RUN_ON_SAUCE']
     directions = %w{ top right bottom left }
     input_border_colors = nil
     match do |actual|
-      input = actual.find(textField_selector[:input])
+      input = actual.find(text_field_selector[:input])
       input_border_colors = directions.map do |direction|
         input.native.style("border-#{direction}-color")
       end
@@ -65,7 +65,7 @@ describe 'the Text Field control', :type => :feature, sauce: ENV['RUN_ON_SAUCE']
 
   before do
     visit 'http://localhost:8000/test/TextField'
-    expect(page).to have_css(textField_selector[:root]) # Wait for textFieldes to render before proceeding
+    expect(page).to have_css(text_field_selector[:root]) # Wait for textFieldes to render before proceeding
   end
 
   #
@@ -77,7 +77,7 @@ describe 'the Text Field control', :type => :feature, sauce: ENV['RUN_ON_SAUCE']
   it 'should appear as enabled when initialized to enabled' do
     # TextField1 is initialized to the enabled state
     within(fixture_selector[:textField1]) do
-      expect(find(textField_selector[:root])).to appear_as_enabled
+      expect(find(text_field_selector[:root])).to appear_as_enabled
     end
   end
 
@@ -86,7 +86,7 @@ describe 'the Text Field control', :type => :feature, sauce: ENV['RUN_ON_SAUCE']
     find(fixture_selector[:disable_textField1_modifier]).click()
 
     within(fixture_selector[:textField1]) do
-      expect(find(textField_selector[:root])).to appear_as_disabled
+      expect(find(text_field_selector[:root])).to appear_as_disabled
     end
   end
 
@@ -96,14 +96,14 @@ describe 'the Text Field control', :type => :feature, sauce: ENV['RUN_ON_SAUCE']
     find(fixture_selector[:enable_textField1_modifier]).click()
 
     within(fixture_selector[:textField1]) do
-      expect(find(textField_selector[:root])).to appear_as_enabled
+      expect(find(text_field_selector[:root])).to appear_as_enabled
     end
   end
 
   it 'should appear as disabled when initialized to disabled' do
     # TextField2 is initialized to the disabled state
     within(fixture_selector[:textField2]) do
-      expect(find(textField_selector[:root])).to appear_as_disabled
+      expect(find(text_field_selector[:root])).to appear_as_disabled
     end
   end
 
@@ -112,7 +112,7 @@ describe 'the Text Field control', :type => :feature, sauce: ENV['RUN_ON_SAUCE']
     find(fixture_selector[:enable_textField2_modifier]).click()
 
     within(fixture_selector[:textField2]) do
-      expect(find(textField_selector[:root])).to appear_as_enabled
+      expect(find(text_field_selector[:root])).to appear_as_enabled
     end
   end
 
@@ -122,14 +122,14 @@ describe 'the Text Field control', :type => :feature, sauce: ENV['RUN_ON_SAUCE']
     find(fixture_selector[:disable_textField2_modifier]).click()
 
     within(fixture_selector[:textField2]) do
-      expect(find(textField_selector[:root])).to appear_as_disabled
+      expect(find(text_field_selector[:root])).to appear_as_disabled
     end
   end
 
   it 'should appear as hovered when hovered' do
     text_field = nil
     within(fixture_selector[:textField1]) do
-      text_field = find(textField_selector[:root])
+      text_field = find(text_field_selector[:root])
     end
 
     text_field.hover()
@@ -141,7 +141,7 @@ describe 'the Text Field control', :type => :feature, sauce: ENV['RUN_ON_SAUCE']
     # TextField2 is initialized to the disabled state
     text_field = nil
     within(fixture_selector[:textField2]) do
-      text_field = find(textField_selector[:root])
+      text_field = find(text_field_selector[:root])
     end
 
     text_field.hover()
